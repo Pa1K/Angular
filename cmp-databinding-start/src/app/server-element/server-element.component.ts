@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, ViewEncapsulation, OnChanges, SimpleChanges, DoCheck, AfterContentInit } from '@angular/core';
+import { Component, OnInit,Input, ViewEncapsulation, OnChanges, SimpleChanges, DoCheck, AfterContentInit, ViewChild, ElementRef, ContentChild } from '@angular/core';
 import { AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
@@ -19,6 +19,8 @@ OnDestroy {
  
   @Input('srvElement') element : {type : string, name: string, content: string};
   @Input() name: string;
+  @ViewChild('heading') header: ElementRef;
+  @ContentChild('paragraph') content:ElementRef;
   constructor() {
     console.log('constructor called');
    }
@@ -32,6 +34,9 @@ OnDestroy {
    }
   ngOnInit() {
     console.log('ngOnInit called');
+    console.log("Heading data :"+ this.header.nativeElement.textContent);
+    console.log("Paragraph content data :"+ this.content.nativeElement.textContent);
+
   }
 
   ngDoCheck(){
@@ -40,13 +45,14 @@ OnDestroy {
 
   ngAfterContentInit() {
     console.log('ngAfterContentInit called');
-
+    console.log("Paragraph content data :"+ this.content.nativeElement.textContent);
   }
   ngOnDestroy(){
     console.log('ngOnDestroy called');
 }
   ngAfterViewInit(){
     console.log('ngAfterViewInit called');
+    console.log("Heading data: "+ this.header.nativeElement.textContent);
   }
   ngAfterContentChecked(){
     console.log('ngAfterContentChecked called');
